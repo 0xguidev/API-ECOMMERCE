@@ -1,17 +1,34 @@
-import { inject, injectable } from 'tsyringe';
+import { injectable } from 'tsyringe';
 import { Product } from '../../domain/entities/product.entity';
-import { IProductRepository } from '../../domain/repositories/product.repository.interface';
 import { CreateProductDto, UpdateProductDto } from '../dto/create-product.dto';
+import { CreateProductUseCase } from '../../domain/use-cases/products/create-product.use-case';
+import { GetProductByIdUseCase } from '../../domain/use-cases/products/get-product-by-id.use-case';
+import { GetProductsBySellerUseCase } from '../../domain/use-cases/products/get-products-by-seller.use-case';
+import { GetAllProductsUseCase } from '../../domain/use-cases/products/get-all-products.use-case';
+import { GetProductsByCategoryUseCase } from '../../domain/use-cases/products/get-products-by-category.use-case';
+import { UpdateProductUseCase } from '../../domain/use-cases/products/update-product.use-case';
+import { DeleteProductUseCase } from '../../domain/use-cases/products/delete-product.use-case';
+import { UpdateStockUseCase } from '../../domain/use-cases/products/update-stock.use-case';
+import { CheckStockAvailabilityUseCase } from '../../domain/use-cases/products/check-stock-availability.use-case';
+import { ReduceStockUseCase } from '../../domain/use-cases/products/reduce-stock.use-case';
 
 @injectable()
 export class ProductService {
   constructor(
-    @inject('IProductRepository')
-    private readonly productRepository: IProductRepository,
+    private readonly createProductUseCase: CreateProductUseCase,
+    private readonly getProductByIdUseCase: GetProductByIdUseCase,
+    private readonly getProductsBySellerUseCase: GetProductsBySellerUseCase,
+    private readonly getAllProductsUseCase: GetAllProductsUseCase,
+    private readonly getProductsByCategoryUseCase: GetProductsByCategoryUseCase,
+    private readonly updateProductUseCase: UpdateProductUseCase,
+    private readonly deleteProductUseCase: DeleteProductUseCase,
+    private readonly updateStockUseCase: UpdateStockUseCase,
+    private readonly checkStockAvailabilityUseCase: CheckStockAvailabilityUseCase,
+    private readonly reduceStockUseCase: ReduceStockUseCase,
   ) {}
 
   async createProduct(dto: CreateProductDto): Promise<Product> {
-    const product = new Product({
+    return this.createProductUseCase.execute({
       name: dto.name,
       description: dto.description,
       price: dto.price,
@@ -21,53 +38,44 @@ export class ProductService {
       images: dto.images,
       variations: dto.variations,
     });
-
-    return this.productRepository.create(product);
   }
 
   async getProductById(id: string): Promise<Product | null> {
-    return this.productRepository.findById(id);
+    return this.getProductByIdUseCase.execute(id);
   }
 
   async getProductsBySeller(sellerId: string): Promise<Product[]> {
-    return this.productRepository.findBySellerId(sellerId);
+    return this.getProductsBySellerUseCase.execute(sellerId);
   }
 
   async getAllProducts(): Promise<Product[]> {
-    return this.productRepository.findAll();
+    return this.getAllProductsUseCase.execute();
   }
 
   async getProductsByCategory(category: string): Promise<Product[]> {
-    return this.productRepository.findByCategory(category);
+    return this.getProductsByCategoryUseCase.execute(category);
   }
 
   async updateProduct(
     id: string,
     dto: UpdateProductDto,
   ): Promise<Product | null> {
-    return this.productRepository.update(id, dto);
+    return this.updateProductUseCase.execute(id, dto);
   }
 
   async deleteProduct(id: string): Promise<boolean> {
-    return this.productRepository.delete(id);
+    return this.deleteProductUseCase.execute(id);
   }
 
   async updateStock(id: string, stock: number): Promise<Product | null> {
-    return this.productRepository.updateStock(id, stock);
+    return this.updateStockUseCase.execute(id, stock);
   }
 
   async checkStockAvailability(id: string, quantity: number): Promise<boolean> {
-    const product = await this.productRepository.findById(id);
-    return product ? product.stock >= quantity : false;
+    return this.checkStockAvailabilityUseCase.execute(id, quantity);
   }
 
   async reduceStock(id: string, quantity: number): Promise<Product | null> {
-    const product = await this.productRepository.findById(id);
-    if (!product || product.stock < quantity) {
-      return null;
-    }
-
-    const newStock = product.stock - quantity;
-    return this.productRepository.updateStock(id, newStock);
+    return this.reduceStockUseCase.execute(id, quantity);
   }
 }
