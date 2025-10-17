@@ -74,18 +74,19 @@ export class UserRepository implements IUserRepository {
 
   async findAll(): Promise<User[]> {
     const users = await this.prisma.user.findMany();
-    return users.map((user) =>
-      new User(
-        {
-          name: user.name,
-          email: user.email,
-          password: user.password,
-          role: mapPrismaRoleToDomain(user.role),
-          isTwoFactorEnabled: user.isTwoFactorEnabled,
-          twoFactorSecret: user.twoFactorSecret,
-        },
-        user.id,
-      ),
+    return users.map(
+      (user) =>
+        new User(
+          {
+            name: user.name,
+            email: user.email,
+            password: user.password,
+            role: mapPrismaRoleToDomain(user.role),
+            isTwoFactorEnabled: user.isTwoFactorEnabled,
+            twoFactorSecret: user.twoFactorSecret,
+          },
+          user.id,
+        ),
     );
   }
 
