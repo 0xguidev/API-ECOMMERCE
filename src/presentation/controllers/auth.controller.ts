@@ -35,7 +35,9 @@ export class AuthController {
   }
 
   @Post('setup-2fa')
-  async setupTwoFactor(@Body() body: { userId: string }): Promise<TwoFactorSetup> {
+  async setupTwoFactor(
+    @Body() body: { userId: string },
+  ): Promise<TwoFactorSetup> {
     return this.authService.setupTwoFactor(body.userId);
   }
 
@@ -50,7 +52,9 @@ export class AuthController {
   }
 
   @Post('refresh')
-  async refreshToken(@Body() body: { refreshToken: string }): Promise<AuthTokens> {
+  async refreshToken(
+    @Body() body: { refreshToken: string },
+  ): Promise<AuthTokens> {
     return this.authService.refreshToken(body.refreshToken);
   }
 }

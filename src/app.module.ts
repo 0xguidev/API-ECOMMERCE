@@ -6,9 +6,12 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { UserController } from './presentation/controllers/user.controller';
 import { AuthController } from './presentation/controllers/auth.controller';
+import { ProductController } from './presentation/controllers/product.controller';
 import { UserService } from './application/services/user.service';
 import { AuthService } from './application/services/auth.service';
+import { ProductService } from './application/services/product.service';
 import { UserRepository } from './infrastructure/repositories/user.repository';
+import { ProductRepository } from './infrastructure/repositories/product.repository';
 import { JwtStrategy } from './presentation/strategies/jwt.strategy';
 import { PrismaClient } from '../generated/prisma';
 
@@ -23,15 +26,25 @@ import { PrismaClient } from '../generated/prisma';
       signOptions: { expiresIn: '15m' },
     }),
   ],
-  controllers: [AppController, UserController, AuthController],
+  controllers: [
+    AppController,
+    UserController,
+    AuthController,
+    ProductController,
+  ],
   providers: [
     AppService,
     UserService,
     AuthService,
+    ProductService,
     JwtStrategy,
     {
       provide: 'IUserRepository',
       useClass: UserRepository,
+    },
+    {
+      provide: 'IProductRepository',
+      useClass: ProductRepository,
     },
     {
       provide: PrismaClient,
