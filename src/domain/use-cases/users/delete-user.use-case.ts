@@ -1,4 +1,3 @@
-
 import { inject, injectable } from 'tsyringe';
 import { IUserRepository } from '../../repositories/user.repository.interface';
 
