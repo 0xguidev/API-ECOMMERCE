@@ -11,7 +11,7 @@
 - [x] delete-user.use-case.spec.ts
 
 ### Products
-- [ ] create-product.use-case.spec.ts
+- [x] create-product.use-case.spec.ts
 - [x] get-product-by-id.use-case.spec.ts
 - [ ] get-products-by-seller.use-case.spec.ts
 - [ ] get-all-products.use-case.spec.ts
