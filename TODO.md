@@ -7,7 +7,7 @@
 - [x] authenticate-user.use-case.spec.ts
 - [x] get-user-by-id.use-case.spec.ts
 - [x] get-all-users.use-case.spec.ts
-- [ ] update-user.use-case.spec.ts
+- [x] update-user.use-case.spec.ts
 - [ ] delete-user.use-case.spec.ts
 
 ### Products
