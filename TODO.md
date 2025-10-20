@@ -1,39 +1,33 @@
-# TODO - Implementação de Testes Unitários para Use Cases
+# TODO - API ECOMMERCE
 
-## Products (4 testes pendentes)
+## ✅ Completed
 
-- [x] delete-product.use-case.spec.ts
-- [x] update-stock.use-case.spec.ts
-- [x] check-stock-availability.use-case.spec.ts
-- [x] reduce-stock.use-case.spec.ts
+- [x] Implement unit tests for Auth use cases (24 test suites, 61 tests)
+  - register.use-case.spec.ts
+  - login.use-case.spec.ts
+  - verify-two-factor.use-case.spec.ts
+  - setup-two-factor.use-case.spec.ts
+  - enable-two-factor.use-case.spec.ts
+  - disable-two-factor.use-case.spec.ts
+  - refresh-token.use-case.spec.ts
 
-## Auth (7 testes pendentes)
+## 🔄 In Progress
 
-- [x] register.use-case.spec.ts
-- [x] login.use-case.spec.ts
-- [x] verify-two-factor.use-case.spec.ts
-- [x] setup-two-factor.use-case.spec.ts
-- [x] enable-two-factor.use-case.spec.ts
-- [x] disable-two-factor.use-case.spec.ts
-- [x] refresh-token.use-case.spec.ts
+- [ ] Implement unit tests for Orders use cases (8 pending)
+  - [ ] create-order.use-case.spec.ts
+  - [ ] get-order-by-id.use-case.spec.ts
+  - [ ] get-orders-by-customer.use-case.spec.ts
+  - [ ] get-orders-by-seller.use-case.spec.ts
+  - [ ] get-all-orders.use-case.spec.ts
+  - [ ] update-order.use-case.spec.ts
+  - [ ] update-order-status.use-case.spec.ts
+  - [ ] delete-order.use-case.spec.ts
 
-## Orders (8 testes pendentes)
+## 📋 Pending
 
-- [ ] create-order.use-case.spec.ts
-- [ ] get-order-by-id.use-case.spec.ts
-- [ ] get-orders-by-customer.use-case.spec.ts
-- [ ] get-orders-by-seller.use-case.spec.ts
-- [ ] get-all-orders.use-case.spec.ts
-- [ ] update-order.use-case.spec.ts
-- [ ] update-order-status.use-case.spec.ts
-- [ ] delete-order.use-case.spec.ts
-
-## Próximos Passos
-
-- [ ] Criar branch com prefixo "blackboxai/add-missing-use-case-tests"
-- [ ] Implementar testes para Products
-- [ ] Implementar testes para Auth
-- [ ] Implementar testes para Orders
-- [ ] Executar todos os testes para verificar
-- [ ] Fazer commits convencionais
-- [ ] Abrir pull request
+- [ ] Implement unit tests for Products use cases (remaining)
+- [ ] Implement unit tests for Users use cases (remaining)
+- [ ] Implement integration tests
+- [ ] Implement e2e tests
+- [ ] Add API documentation
+- [ ] Add code coverage reports
