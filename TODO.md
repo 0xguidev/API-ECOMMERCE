@@ -17,7 +17,7 @@
 - [x] get-product-by-id.use-case.spec.ts
 - [x] get-products-by-seller.use-case.spec.ts
 - [x] get-all-products.use-case.spec.ts
-- [ ] get-products-by-category.use-case.spec.ts
+- [x] get-products-by-category.use-case.spec.ts
 - [ ] update-product.use-case.spec.ts
 - [ ] delete-product.use-case.spec.ts
 - [ ] update-stock.use-case.spec.ts
