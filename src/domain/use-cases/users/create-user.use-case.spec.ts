@@ -1,4 +1,4 @@
-import { Test, TestingModule } from '@nestjs/testing';
+import 'reflect-metadata';
 import { CreateUserUseCase } from './create-user.use-case';
 import { IUserRepository } from '../../repositories/user.repository.interface';
 import { User, Role } from '../../entities/user.entity';
@@ -7,22 +7,17 @@ describe('CreateUserUseCase', () => {
   let useCase: CreateUserUseCase;
   let userRepository: jest.Mocked<IUserRepository>;
 
-  beforeEach(async () => {
-    const module: TestingModule = await Test.createTestingModule({
-      providers: [
-        CreateUserUseCase,
-        {
-          provide: 'IUserRepository',
-          useValue: {
-            findByEmail: jest.fn(),
-            create: jest.fn(),
-          },
-        },
-      ],
-    }).compile();
+  beforeEach(() => {
+    userRepository = {
+      findByEmail: jest.fn(),
+      create: jest.fn(),
+      findById: jest.fn(),
+      findAll: jest.fn(),
+      update: jest.fn(),
+      delete: jest.fn(),
+    } as jest.Mocked<IUserRepository>;
 
-    useCase = module.get<CreateUserUseCase>(CreateUserUseCase);
-    userRepository = module.get('IUserRepository');
+    useCase = new CreateUserUseCase(userRepository);
   });
 
   it('should create a user successfully', async () => {
