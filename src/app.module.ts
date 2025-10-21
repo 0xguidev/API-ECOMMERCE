@@ -7,10 +7,12 @@ import { AppService } from './app.service';
 import { UserController } from './presentation/controllers/user.controller';
 import { AuthController } from './presentation/controllers/auth.controller';
 import { ProductController } from './presentation/controllers/product.controller';
+import { CustomerController } from './presentation/controllers/customer.controller';
 import { UserService } from './application/services/user.service';
 import { AuthService } from './application/services/auth.service';
 import { ProductService } from './application/services/product.service';
 import { OrderService } from './application/services/order.service';
+import { CustomerService } from './application/services/customer.service';
 import { UserRepository } from './infrastructure/repositories/user.repository';
 import { ProductRepository } from './infrastructure/repositories/product.repository';
 import { OrderRepository } from './infrastructure/repositories/order.repository';
@@ -52,6 +54,7 @@ import { GetAllOrdersUseCase } from './domain/use-cases/orders/get-all-orders.us
 import { UpdateOrderUseCase } from './domain/use-cases/orders/update-order.use-case';
 import { UpdateOrderStatusUseCase } from './domain/use-cases/orders/update-order-status.use-case';
 import { DeleteOrderUseCase } from './domain/use-cases/orders/delete-order.use-case';
+import { GetCustomersUseCase } from './domain/use-cases/users/get-customers.use-case';
 
 @Module({
   imports: [
@@ -69,6 +72,7 @@ import { DeleteOrderUseCase } from './domain/use-cases/orders/delete-order.use-c
     UserController,
     AuthController,
     ProductController,
+    CustomerController,
   ],
   providers: [
     AppService,
@@ -76,6 +80,7 @@ import { DeleteOrderUseCase } from './domain/use-cases/orders/delete-order.use-c
     AuthService,
     ProductService,
     OrderService,
+    CustomerService,
     JwtStrategy,
     // Repositories
     {
@@ -126,6 +131,7 @@ import { DeleteOrderUseCase } from './domain/use-cases/orders/delete-order.use-c
     UpdateOrderUseCase,
     UpdateOrderStatusUseCase,
     DeleteOrderUseCase,
+    GetCustomersUseCase,
   ],
 })
 export class AppModule {}
